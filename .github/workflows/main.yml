@@ -42,7 +42,9 @@ jobs:
       
     - name: 'Convert plan to JSON'
       id: convert-to-json
-      run: terraform show -json plan.out > plan.out.json
+      run: |
+        terraform show -json plan.out > plan.out.json
+        head -2 plan.out.json |tail -1 > plan.out.json 
       
     - name: 'Terraform Compliance'
       id: compliance
