@@ -31,6 +31,7 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       with:
         terraform_version: 0.13.2
+        terraform_wrapper: false
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
@@ -44,7 +45,6 @@ jobs:
       id: convert-to-json
       run: |
         terraform show -json plan.out > plan.out.json
-        head -2 plan.out.json |tail -1 > plan.out.json 
       
     - name: 'Terraform Compliance'
       id: compliance
