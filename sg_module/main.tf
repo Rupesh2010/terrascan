@@ -6,6 +6,7 @@ resource "aws_security_group" "default_sg" {
 }
 
 resource "aws_security_group_rule" "ingress_rule" {
+  description       = "TLS from VPC"
   type              = "ingress"
   cidr_blocks       = ["${element(var.inbound_rules[count.index], 0)}"]
   from_port         = "${element(var.inbound_rules[count.index], 1)}"
@@ -15,6 +16,7 @@ resource "aws_security_group_rule" "ingress_rule" {
 }
 
 resource "aws_security_group_rule" "egress_rule" {
+  description       = "TLS from VPC"
   type              = "egress"
   cidr_blocks       = ["${element(var.outbound_rules[count.index], 0)}"]
   from_port         = "${element(var.outbound_rules[count.index], 1)}"
