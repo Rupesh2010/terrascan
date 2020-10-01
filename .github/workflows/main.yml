@@ -18,9 +18,24 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-
-    - name: tfsec
-      uses: triat/terraform-security-scan@v1
+      
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
       with:
-        github_token: ${{ secrets.github_token }}
-        
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+
+    - name: 'Terraform Plan'
+      id: plan
+      run: terraform plan -no-color -out=plan.out
+      
+    - name: 'Convert plan to JSON'
+      id: convert-to-json
+      run: terraform show -json plan.out > plan.out.json
+      
+    - name: 'Terraform Compliance'
+      id: compliance
+      uses: docker://eerkunt/terraform-compliance
+      with:
+        args: -f https://github.com/Rupesh2010/terraform-compliance-test.git -p ./plan.out.json
