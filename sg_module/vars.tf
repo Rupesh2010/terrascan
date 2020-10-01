@@ -5,13 +5,11 @@ variable "sg_description" {
   default = "Security Group managed by Terraform"
 }
 
-variable "inbound_rules" {
-  type = "map"
-}
+variable "inbound_rules" {}
 
-variable "outbound_rules" {
-  type = "map"
-}
+variable "outbound_rules" {}
+
+variable "cidr_blocks" {}
 
 variable "tags" {
   type = "map"
