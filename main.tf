@@ -1,6 +1,6 @@
 module "sg_default" {
   source = "./sg_module"
-  sg_name = "sg-test"
+  sg_name = "test"
   sg_description = "Security Group managed by Terraform"
   vpc_id = "vpc-26e8dc5c"
   
@@ -18,7 +18,7 @@ module "sg_default" {
 
   ### Tags ###  
   tags = {
-    Name = "${var.sg_name}"
+    Name = "test"
     Project = "test"
   }
 }
