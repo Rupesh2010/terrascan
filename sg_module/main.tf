@@ -8,19 +8,19 @@ resource "aws_security_group" "default_sg" {
 resource "aws_security_group_rule" "ingress_rule" {
   description       = "TLS from VPC"
   type              = "ingress"
-  cidr_blocks       = ["${element(var.inbound_rules[count.index], 0)}"]
-  from_port         = "${element(var.inbound_rules[count.index], 1)}"
-  to_port           = "${element(var.inbound_rules[count.index], 2)}"
-  protocol          = "${element(var.inbound_rules[count.index], 3)}"
+  cidr_blocks       = ["${var.cidr_blocks}"]
+  from_port         = "${var.inbound_rule}"
+  to_port           = "${var.outbound_rules}"
+  protocol          = "tcp"
   security_group_id = "${aws_security_group.default_sg.id}"
 }
 
 resource "aws_security_group_rule" "egress_rule" {
   description       = "TLS from VPC"
   type              = "egress"
-  cidr_blocks       = ["${element(var.outbound_rules[count.index], 0)}"]
-  from_port         = "${element(var.outbound_rules[count.index], 1)}"
-  to_port           = "${element(var.outbound_rules[count.index], 2)}"
-  protocol          = "${element(var.outbound_rules[count.index], 3)}"
+  cidr_blocks       = ["${var.cidr_blocks}"]
+  from_port         = "${var.inbound_rule}"
+  to_port           = "${var.outbound_rules}"
+  protocol          = "tcp"
   security_group_id = "${aws_security_group.default_sg.id}"
 } 
