@@ -48,6 +48,5 @@ jobs:
       
     - name: 'Terraform Compliance'
       id: compliance
-      uses: docker://rphuyal/complaince
-      with:
-        args: -f git:https://github.com/Rupesh2010/terraform-compliance-test.git -p ./plan.out.json
+      run: |
+       docker run rphuyal/complaince-f git:https://github.com/Rupesh2010/terraform-compliance-test.git -p ./plan.out.json
