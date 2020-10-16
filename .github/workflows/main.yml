@@ -61,5 +61,5 @@ jobs:
       uses: terraform-compliance/github_action@main
       with:
           plan: ./plan.out.json
-          features: ssh://git@github.com/Rupesh2010/terraform-compliance-test.git
+          features: https://git@github.com/Rupesh2010/terraform-compliance-test.git
 
